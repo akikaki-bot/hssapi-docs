@@ -1,0 +1,57 @@
+## GET /v1/users/\{id\}
+
+:::warning
+認証が必須です。
+:::
+
+user情報を取得します。
+
+### リクエスト
+
+```http
+GET /v1/users/\{id\}
+```
+
+### レスポンス ( Example )
+
+```js
+{
+    "developer" : boolean
+    "hid" : Snowflake
+    "discordAccount" ?: boolean
+    "username" : string
+}
+```
+
+|  値名  |  型  | 説明  |
+| ---- | ---- | ---- |
+|  developer  |  Boolean  | 開発者が有効かどうかです。全てのアカウントでtrueになります。  |
+|  hid  |  Snowflake (BigInt or String)  | ユーザーのUniqueIDです。  |
+|  discordAccount  |  Boolean  | Discordアカウントでの登録が有効かどうかです。  |
+|  username  |  String  | ユーザーの名前です。  |
+
+### リクエスト
+
+```http
+GET /v1/users/@me
+```
+
+### レスポンス ( Example )
+
+```js
+{
+    "developer" : boolean
+    "hid" : Snowflake
+    "discordAccount" ?: boolean
+    "username" : string
+    "email" : string
+}
+```
+
+|  値名  |  型  | 説明  |
+| ---- | ---- | ---- |
+|  developer  |  Boolean  | 開発者が有効かどうかです。全てのアカウントでtrueになります。  |
+|  hid  |  Snowflake (BigInt or String)  | ユーザーのUniqueIDです。  |
+|  discordAccount  |  Boolean  | Discordアカウントでの登録が有効かどうかです。  |
+|  username  |  String  | ユーザーの名前です。  |
+|  email  |  String  | ユーザーのメールアドレスです。 <br />※`@me`の場合のみ出現します。 |

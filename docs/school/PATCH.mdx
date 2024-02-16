@@ -1,0 +1,234 @@
+# PATCH /v1/school 
+
+:::warning
+認証が必須です。
+:::
+
+学校情報を更新します。
+
+これには
+- 時間割
+- 標準時間割
+- イベントデータ 等々
+
+が含まれます。
+
+## Request
+
+```http
+PATCH /v1/school
+```
+
+## Request Body 
+
+### headkey : details
+
+```js
+{
+    schoolId : "学校IDです。",
+    bodies : [
+        {
+            headkey : "details",
+            //
+            // detailsの場合に必要なデータです。
+            // 今のところ、権限がオーナーの場合に変更ができます。
+            // それ以外のユーザーが変更しようとすると403が返ります。
+            // また、idは変更できません。
+            //
+            key : "type" | "name" | "ownerId" | "admins",
+            //
+            // detailsの時に必要なデータです。
+            // detailsは headKey , key , value のみのデータで完結します。
+            // これより下のデータは、userDatasの時に必要となる値です。
+            //
+            value : number | string | object
+        }
+    ]
+}
+```
+
+| key | value | type | description |
+| --- | --- | --- | --- |
+| headkey | `String` details | 詳細変更頭キーです。 |
+| key | `Types` "type" \| "name" \| "ownerId" \| "admins" | 変更するデータの種類です。 |
+| value | `number` \| `string` \| `object` | 変更するデータです。 |
+
+### headkey : userDatas
+
+学校の時間割やイベントデータを変更する際はこちらのへっときーを使用します。
+
+**key : "timelineData"** もしくは "defaultTimelineData"
+
+```js
+{
+    schoolId : "学校IDです。",
+    bodies : [
+        {
+            headKey : "userDatas",
+            key : "timelineData",
+            //
+            // 学年
+            //
+            grade : number,
+            //
+            // クラス
+            //
+            class : number,
+            //
+            // 変更する曜日です。
+            //
+            date : "sun" | "mon" | "tue" | "wed" | "thu" | "fri" | "sat",
+            //
+            // もし一部のみを変更する場合、indexを指定します。
+            //
+            index : number,
+            //
+            // indexを指定した場合は `Object`を、指定しない場合は `Array`を指定します。
+            // key : "timelineData" もしくは "defaultTimelineData" の場合のデータ指定です。
+            // ここではindexを指定した場合のデータを居列します。
+            // indexを指定しない場合は、Arrayで指定します。
+            // Arrayで指定しない場合だと、時間割データはその配列に変更されます。
+            //
+            value : {
+                name : "教科名です。",
+                place : "場所です。 nullableです。",
+                homework : [
+                    {
+                        name : "宿題名です。",
+                        // これは Boolean です。 true か false を返します。
+                        istooBig : true | false,
+                        page : {
+                            start : "開始ページです。numberもしくはstring",
+                            end : "終了ページです。 numberもしくはstring",
+                            comment : "補足です。 nullableです。"
+                        }
+                    }
+                ],
+            }
+        }
+    ]
+}
+```
+
+| key | value | type | description |
+| --- | --- | --- | --- |
+| headkey | `String` userDatas | ユーザーデータ変更頭キーです。 |
+| key | `String` timelineData \| defaultTimelineData | 変更するデータの種類です。 |
+| grade | `number` | 変更する学年です。 |
+| class | `number` | 変更するクラスです。 |
+| date | `Types` "sun" \| "mon" \| "tue" \| "wed" \| "thu" \| "fri" \| "sat" | 変更する曜日です。 |
+| index | `number` | もし一部のみを変更する場合、indexを指定します。 |
+| value | `Object` \| `Array` | 変更するデータです。 |
+| value.name | `string` | 教科名です。 |
+| value.place | `string` | 場所です。 nullableです。 |
+| value.homework | `Array` | 宿題データです。 |
+| value.homework.name | `string` | 宿題名です。 |
+| value.homework.istooBig | `boolean` | 宿題が大きすぎるかのフラグです。 |
+| value.homework.page | `Object` | 宿題のページデータです。 |
+| value.homework.page.start | `number` \| `string` | 開始ページです。 |
+| value.homework.page.end | `number` \| `string` | 終了ページです。 |
+| value.homework.page.comment | `string` | 補足です。 nullableです。 |
+
+
+**key : eventData**
+
+```js
+{
+    schoolId : "学校IDです。",
+    bodies : [
+        {
+            headKey : "userDatas",
+            key : "timelineData",
+            //
+            // 学年
+            //
+            grade : number,
+            //
+            // クラス
+            //
+            class : number,
+            //
+            // 変更する曜日です。
+            //
+            date : "sun" | "mon" | "tue" | "wed" | "thu" | "fri" | "sat",
+            //
+            // もし一部のみを変更する場合、indexを指定します。
+            //
+            index : number,
+            //
+            // indexを指定した場合は `Object`を、指定しない場合は `Array`を指定します。
+            // key : "timelineData" もしくは "defaultTimelineData" の場合のデータ指定です。
+            // ここではindexを指定した場合のデータを居列します。
+            // indexを指定しない場合は、Arrayで指定します。
+            // Arrayで指定しない場合だと、時間割データはその配列に変更されます。
+            //
+            value : {
+                name : "イベント名です。",
+                place : "場所です。 nullableです。",
+                timeData : {
+                    start : "開始時間です。",
+                    end : "終了時間です。",
+                    isEndofDay : "終日続くイベントかのフラグです。booleanです。"
+                }
+            }
+        }
+    ]
+}
+```
+
+| key | value | type | description |
+| --- | --- | --- | --- |
+| headkey | `String` userDatas | ユーザーデータ変更頭キーです。 |
+| key | `String` eventData | 変更するデータの種類です。 |
+| grade | `number` | 変更する学年です。 |
+| class | `number` | 変更するクラスです。 |
+| date | `Types` "sun" \| "mon" \| "tue" \| "wed" \| "thu" \| "fri" \| "sat" | 変更する曜日です。 |
+| index | `number` | もし一部のみを変更する場合、indexを指定します。 |
+| value | `Object` \| `Array` | 変更するデータです。 |
+| value.name | `string` | イベント名です。 |
+| value.place | `string` | 場所です。 nullableです。 |
+| value.timeData | `Object` | イベントの時間データです。 |
+| value.timeData.start | `string` | 開始時間です。 |
+| value.timeData.end | `string` | 終了時間です。 |
+| value.timeData.isEndofDay | `boolean` | 終日続くイベントかのフラグです。 |
+
+
+## Response Datas 
+
+### 権限不足
+
+```js 
+{
+    status : -1,
+    body : {
+        message : "Forbidden. You don't have access permission."
+    }
+}
+```
+
+### エラーがある場合
+
+```js
+{
+    status : -1,
+    body : {
+        message : [
+            {
+                message : "エラー内容です。",
+                value : "期待されなかったリクエストデータの型です",
+                be : "期待されるデータの型です。"
+            }
+        ]
+    }
+}
+```
+
+### エラーがない場合
+
+```js
+{
+    status : 0,
+    body : {
+        message : "Success"
+    }
+}
