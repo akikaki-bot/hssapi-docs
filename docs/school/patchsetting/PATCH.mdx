@@ -1,0 +1,121 @@
+## PATCH /v1/school/\{id\}/patchsetting
+
+:::warning
+認証が必須です。
+:::
+
+:::danger
+このAPIはそのうち `PATCH /v1/school`に統合されます。
+そもそも差が無さ過ぎます。ﾅﾆｺﾚ？
+:::
+
+
+時間割設定等細かい設定を更新します。
+
+### リクエスト
+
+```http
+PATCH /v1/school/\{id\}/patchsetting
+```
+
+### リクエストボディー 
+
+### headInfo : userDatas
+
+:::danger
+ここのエンドポイントでの時間割変更は非推奨とマークされています。
+
+ここではなく絶対に `PATCH /v1/school` を使ってください。
+:::
+
+```ts 
+type Value<T extends keyof UserDatas> = UserDatas[ T ]
+
+interface timelineData {
+    headInfo : "userDatas",
+    gradeClass ?: { grade : number , class : number }
+    patchHeader : "timelineData"
+    value : Value<"timelineData">
+}
+```
+
+| 値名 | 型 | 説明 |
+|---|---|---|
+| headInfo | string | `userDatas` 固定 |
+| gradeClass | \{ grade : number , class : number \} | クラス指定 |
+| patchHeader | string | `timelineData` 固定 |
+| value | object | 更新するデータ |
+
+### patchHeader : defaultTimelineIndex
+
+:::note 
+デフォルトの時間割を変更する際はこっちを使ってください。
+:::
+
+```ts
+type Value<T extends keyof UserDatas> = UserDatas[ T ]
+
+interface defaultTimelineIndex {
+    headInfo : "userDatas",
+    gradeClass ?: { grade : number , class : number }
+    patchHeader : "defaultTimelineIndex"
+    value : Value<"defaultTimelineIndex">
+}
+```
+
+| 値名 | 型 | 説明 |
+|---|---|---|
+| headInfo | string | `userDatas` 固定 |
+| gradeClass | \{ grade : number , class : number \} | クラス指定 |
+| patchHeader | string | `defaultTimelineIndex` 固定 |
+| value | number | 時間割数指定 |
+
+### headInfo : details
+
+:::danger
+ここのエンドポイントではdetailsの編集は許可されません。
+:::
+
+```ts
+interface PatchsettingData {
+    headInfo : "details"
+    gradeClass ?: { grade : number , class : number }
+    patchHeader : "."
+    value : {}
+}
+```
+
+### レスポンス ( Example )
+
+```js
+{
+    "message" : "Success."
+}
+```
+
+### このエンドポイントの注意点
+
+このエンドポイントは制作者自身も「なんでこれ作った、、、？」って思えるぐらいのエンドポイントです。
+
+説明(遺言)にはこう書いてありました。
+
+```ts
+/**
+ * @endpoint /v1/school/:id/patchsetting
+ * @method PATCH
+ * 
+ * @description
+ * 学校の設定を少しだけ変えるフロントエンド追従バックエンドAPIです。（語彙力無し）
+ * 
+ * @param id 学校のI
+ * @authorization Bearer <token>
+ */
+app.patch("/v1/school/:id/patchsetting" , async ( req: Request, res: Response<BaseRequest<{ message : string }>> ) => { })
+```
+**学校の設定を少しだけ変えるフロントエンド追従バックエンドAPIです。（語彙力無し）**
+
+？？ー？「何を言っているんだ貴様は。」
+
+ということで、時間割変更も、時間割数変更も `PATCH /v1/school` で出来るようにしますので、、
+
+しばらくはこのエンドポイントを使ってあげてくださいね、、

@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 const FeatureList = [
 	{
 		title: 'RESTful API',
-		Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+		Svg: require('@site/static/img/future1.png').default,
 		description: (
 			<>
 				HSS APIはRestfulなAPIです。これにより、簡単にデータを取得、更新、削除することができます。
@@ -14,7 +14,7 @@ const FeatureList = [
 	},
 	{
 		title: 'Free To Use',
-		Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+		Svg: require('@site/static/img/future2.png').default,
 		description: (
 			<>
 				HSS APIは無料で使用できます。
@@ -23,7 +23,7 @@ const FeatureList = [
 	},
 	{
 		title: 'Great Authorization',
-		Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+		Svg: require('@site/static/img/future3.png').default,
 		description: (
 			<>
 				個人情報を取り扱うため、HSS APIは認証を必要とします。認証トークンはユーザーがログインした後に取得できます。
@@ -36,7 +36,7 @@ function Feature({ Svg, title, description }) {
 	return (
 		<div className={clsx('col col--4')}>
 			<div className="text--center">
-				<Svg className={styles.featureSvg} role="img" />
+				<img src={Svg} className={styles.featureSvg} role="img" />
 			</div>
 			<div className="text--center padding-horiz--md">
 				<Heading as="h3">{title}</Heading>

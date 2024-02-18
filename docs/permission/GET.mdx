@@ -1,0 +1,26 @@
+## GET /v1/permission
+
+:::warning
+認証が必須です。
+:::
+
+自分が閲覧できる学校のIDを返却します。
+
+### リクエスト
+
+```http
+GET /v1/permission
+```
+
+### レスポンス
+
+```json
+{
+    "schoolId" : string[]
+}
+```
+
+| 値名 | 型 | 説明 |
+| --- | --- | --- |
+| schoolId | string[] | 学校IDの配列 |
+
