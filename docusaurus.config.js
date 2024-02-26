@@ -31,7 +31,6 @@ const config = {
   // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'ja',
-    locales: ['ja'],
   },
 
   plugins: [
@@ -39,7 +38,7 @@ const config = {
       require.resolve("@easyops-cn/docusaurus-search-local"),
       {
         indexDocs: true,
-        language: "ja",
+        //language: "ja",
       },
     ],
   ],
