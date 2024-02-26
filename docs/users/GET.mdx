@@ -20,15 +20,19 @@ GET /v1/users/\{id\}
     "hid" : Snowflake
     "discordAccount" ?: boolean
     "username" : string
+    "isBot" ?: boolean
+    "description" ?: string
 }
 ```
 
-|  値名  |  型  | 説明  |
-| ---- | ---- | ---- |
-|  developer  |  Boolean  | 開発者が有効かどうかです。全てのアカウントでtrueになります。  |
-|  hid  |  Snowflake (BigInt or String)  | ユーザーのUniqueIDです。  |
-|  discordAccount  |  Boolean  | Discordアカウントでの登録が有効かどうかです。  |
-|  username  |  String  | ユーザーの名前です。  |
+|  値名  |  型  | 説明  | かならず出現するか  |
+| ---- | ---- | ---- | ---- |
+|  developer  |  Boolean  | 開発者が有効かどうかです。全てのアカウントでtrueになります。  |true |
+|  hid  |  Snowflake (BigInt or String)  | ユーザーのUniqueIDです。  |true |
+|  discordAccount  |  Boolean  | Discordアカウントでの登録が有効かどうかです。  |true |
+|  username  |  String  | ユーザーの名前です。  |true |
+|  isBot  |  Boolean  | ユーザーがBotかどうかを判別します。Botの場合出現します。 | false  |
+|  description  |  String  | Botの説明です。  | false  |
 
 ### リクエスト
 
@@ -48,10 +52,11 @@ GET /v1/users/@me
 }
 ```
 
-|  値名  |  型  | 説明  |
-| ---- | ---- | ---- |
-|  developer  |  Boolean  | 開発者が有効かどうかです。全てのアカウントでtrueになります。  |
-|  hid  |  Snowflake (BigInt or String)  | ユーザーのUniqueIDです。  |
-|  discordAccount  |  Boolean  | Discordアカウントでの登録が有効かどうかです。  |
-|  username  |  String  | ユーザーの名前です。  |
-|  email  |  String  | ユーザーのメールアドレスです。 <br />※`@me`の場合のみ出現します。 |
+|  値名  |  型  | 説明  | かならず出現するか  |
+| ---- | ---- | ---- | ---- |
+|  developer  |  Boolean  | 開発者が有効かどうかです。 | true |
+|  hid  |  Snowflake (BigInt or String)  | ユーザーのUniqueIDです。   | true |
+|  discordAccount  |  Boolean  | Discordアカウントでの登録が有効かどうかです。   | true |
+|  username  |  String  | ユーザーの名前です。  | true |
+|  email  |  String  | ユーザーのメールアドレスです。 <br />※`@me`の場合のみ出現します。  | true |
+

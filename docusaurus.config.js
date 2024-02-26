@@ -34,6 +34,16 @@ const config = {
     locales: ['ja'],
   },
 
+  plugins: [
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      {
+        indexDocs: true,
+        language: "ja",
+      },
+    ],
+  ],
+
   presets: [
     [
       'classic',
@@ -44,14 +54,14 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/akikaki-bot/hssapi-docs/tree/main/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/akikaki-bot/hssapi-docs/tree/main/',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -70,6 +80,7 @@ const config = {
         logo: {
           alt: 'HSS Logo',
           src: 'img/logo.png',
+          className: 'rounded-image'
         },
         items: [
           {

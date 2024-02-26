@@ -20,4 +20,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap : 4px;
 }
+
+.layoutHeading {
+	display : flex;
+	flex-direction : column;
+	justify-content: center;
+	align-items : center;
+}
+
+.img {
+	display : flex;
+    border-radius: 30%;
+	width : 20%;
+}
+
+code {
+   padding: 0.2em 0.4em;
+   color : #000000EE;
+}
+
