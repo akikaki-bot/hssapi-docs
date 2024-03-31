@@ -1,0 +1,17 @@
+
+# utilType : MonthData
+
+`Generic T`を各曜日に割り当てたデータ型です。
+
+```ts 
+interface MonthData<T> {
+    sun: T[] | []
+    mon: T[] | []
+    tue: T[] | []
+    wed: T[] | []
+    thu: T[] | []
+    fri: T[] | []
+    sat: T[] | []
+}
+```
+

@@ -1,0 +1,32 @@
+
+# type : Homework 
+
+```ts 
+{
+    /**名前 */
+    name : string,
+    /**とっても大きくてやるのに時間がかかるものか */
+    istooBig : boolean,
+    /**
+     * ページ情報
+     */
+    page : {
+        /**　はｚまり */
+        start : string | number,
+        /** おわり  */
+        end : string | number,
+        /** 何か補足 */
+        comment : string | null
+    }
+}
+```
+
+| プロパティ名 | 型 | 内容 |
+| ---- | ---- | ---- |
+| name | string | 名前 |
+| istooBig | boolean | とっても大きくてやるのに時間がかかるものか |
+| page | object | ページ情報 |
+| page.start | string or number | はじまり |
+| page.end | string or number | おわり |
+| page.comment | string or null | 補足等 |
+

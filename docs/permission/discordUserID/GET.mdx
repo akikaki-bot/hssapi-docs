@@ -1,0 +1,21 @@
+
+## GET /v1/permission/:discordUserID
+
+:::warning
+認証が必須です。
+:::
+
+### Request
+
+```http
+GET /v1/permission/discordUserID
+```
+
+### Response
+
+```ts
+{
+    "discordUserId": string;
+    "registeredSchools": string[];
+}
+```

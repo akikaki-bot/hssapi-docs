@@ -1,0 +1,173 @@
+# PATCH /v1/school/:id/userdatas/:grade/:class/:mon 
+
+:::warning
+認証が必要です。
+:::
+
+使いやすくなった（当社比）あたらしいPATCHです。
+
+:::tip 
+今までの`PATCH /v1/school` と `PATCH /PATCH /v1/school/\{id\}/patchsetting` がついに統合された姿です。
+:::
+
+## リクエスト
+
+```http 
+PATCH /v1/school/:id/userdatas/:grade/:class/:mon
+```
+
+## リクエストボディー
+
+- TimeLine（通常時間割）の変更
+
+### リクエストJSON形式
+
+```ts
+timelineDataChangeRequest {
+    key: "timelineData",
+    value: Subjects[] | Subjects
+    state: "add" | "remove" | "update"
+    index?: number,
+}
+```
+
+### パラメーター
+
+| パラメータ | 形 | 必須 | 説明 |
+| --- | --- | --- | --- |
+| key | string | ○ | "timelineData" |
+| value | Subjects[] | ○ | 追加する科目データ |
+| state | string | ○ | "add" or "remove" or "update" |
+| index | number | x | 更新する場合のインデックス |
+
+### 説明
+`state`に応じて、`value`を追加、削除、更新します。
+
+`update`や`remove`の場合は、`index`を指定してください。そのindexで上書きをします。
+
+:::warning
+`add`は`defaultTimeLineIndex`より多い場合には追加されません。エラーがスローされます。
+:::
+
+- DefaultTimeLine (標準時間割) の変更
+
+### リクエストJSON形式
+
+```ts
+defaultTimelineDataChangeRequest {
+    key: "defaultTimelineData",
+    value: Subjects[] | Subjects | null
+    state: "add" | "remove" | "update"
+    index?: number,
+}
+```
+
+### パラメーター
+
+| パラメータ | 形 | 必須 | 説明 |
+| --- | --- | --- | --- |
+| key | string | ○ | "defaultTimelineData" |
+| value | Subjects[] | ○ | 追加する科目データ |
+| state | string | ○ | "add" or "remove" or "update" |
+| index | number | x | 更新 / 削除 する場合のインデックス |
+
+### 説明
+`state`に応じて、`value`を追加、削除、更新します。
+
+`update`や`remove`の場合は、`index`を指定してください。そのindexで上書きをします。
+
+:::warning
+`add`は`defaultTimeLineIndex`より多い場合には追加されません。エラーがスローされます。
+:::
+
+
+- EventDataの変更
+
+### リクエストJSON形式
+
+```ts
+eventDataChangeRequest {
+    key: "eventData",
+    value: EventData[] | EventData
+    state: "add" | "remove" | "update"
+    index?: number,
+}
+```
+
+### パラメーター
+
+| パラメータ | 形 | 必須 | 説明 |
+| --- | --- | --- | --- |
+| key | string | ○ | "eventData" |
+| value | EventData[] | ○ | 追加するイベントデータ |
+| state | string | ○ | "add" or "remove" or "update" |
+| index | number | x | 更新 / 削除 する場合のインデックス |
+
+### 説明
+
+`state`に応じて、`value`を追加、削除、更新します。
+
+`update`や`remove`の場合は、`index`を指定してください。そのindexで上書きをします。
+
+- Homeworkの変更
+
+### リクエストJSON形式
+
+```ts
+homeworkDataChangeRequest {
+    key: "homework",
+    value: Homework[] | Homework
+    state: "add" | "remove" | "update"
+    index?: number,
+}
+```
+
+### パラメーター
+
+| パラメータ | 形 | 必須 | 説明 |
+| --- | --- | --- | --- |
+| key | string | ○ | "homework" |
+| value | Homework[] | ○ | 追加する宿題データ |
+| state | string | ○ | "add" or "remove" or "update" |
+| index | number | x | 更新 / 削除 する場合のインデックス |
+
+### 説明
+
+`state`に応じて、`value`を追加、削除、更新します。
+
+`update`や`remove`の場合は、`index`を指定してください。そのindexで上書きをします。
+
+:::info 
+URLの `mon`（曜日指定） に左右されません。
+:::
+
+- DefaultTimelineIndexの変更
+
+:::info 
+このリクエストは、`state`が`update`のみです。
+
+また、URLの `mon`(曜日指定) に左右されません。
+:::
+
+### リクエストJSON形式
+
+```ts
+defaultTimelineIndexChangeRequest {
+    key : "defaultTimelineIndex",
+    value : number
+    state : "update"
+}
+```
+
+### パラメーター
+
+| パラメータ | 形 | 必須 | 説明 |
+| --- | --- | --- | --- |
+| key | string | ○ | "defaultTimelineIndex" |
+| value | number | ○ | 更新するデフォルト時間割のインデックス |
+| state | string | ○ | "update" |
+
+### 説明
+
+`value`に指定したインデックスの時間割がデフォルト時間割になります。
+

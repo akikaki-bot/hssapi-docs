@@ -1,0 +1,35 @@
+
+# types : DetailSchool
+
+```ts
+{
+    /**
+     * 学校のタイプ
+     */
+    type: SchoolType
+    /**
+     * 学校名
+     */
+    name: string,
+    /**
+     *  BaseScheme.schoolId と 同様
+     */
+    id: string,
+    /**
+     * 登録代表ユーザー
+     */
+    ownerId: string,
+    /**
+     * 管理者
+     */
+    admins: string[]
+}
+```
+
+| プロパティ | 型 | 説明 |
+| --- | --- | --- |
+| type | [SchoolType](./schooltype) | 学校のタイプ |
+| name | string | 学校名 |
+| id | string | [School](./school).schoolId と 同様 |
+| ownerId | string | 登録代表ユーザー |
+| admins | string[] | 管理者 |
