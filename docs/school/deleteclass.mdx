@@ -1,0 +1,45 @@
+# DELETE /school/:id/class/:grade/:class
+
+:::warning
+認証が必須です。
+:::
+
+クラスを削除します。
+
+### Request
+
+```http
+DELETE /v1/school/:id/class/:grade/:class
+```
+
+### RequestBody
+
+```ts
+{
+    "grade" : number,
+    "classNumber" : number | string
+}
+```
+
+### Response
+
+```ts
+{
+    status : 0 | -1,
+    body : {
+        message : "レスポンスメッセージです。基本的には文字列が返却されます。",
+    }
+}
+```
+
+### Error Responses
+
+- HTTP 401
+
+  - リクエスト形式が誤っています。`grade`は`number`であり、`classNumber`は`number`または`string`である必要があります。
+
+  - 権限がありません。このエンドポイントを実行するには最低でも学校オーナー権限が必要です。
+
+- HTTP 404
+
+  - クラスが存在しません。
