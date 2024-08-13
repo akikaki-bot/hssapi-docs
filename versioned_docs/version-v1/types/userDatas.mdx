@@ -1,0 +1,45 @@
+
+# type : UserDatas 
+
+```ts
+{
+    /**
+     * 学年
+     */
+    grade: 1 | 2 | 3 | 4 | 5 | 6 | number
+    /**
+     * クラス
+     */
+    class : number | string,
+    /**
+     * 時間割
+     */
+    timelineData: MonthData<Subjects>
+    /**
+     * イベント等データ
+     */
+    eventData: MonthData<EventData>
+    /**
+     * 宿題データ
+     */
+    homework: Homework[] | []
+    /**
+     * 基本的な時間割
+     */
+    defaultTimelineData: MonthData<Subjects>
+    /**
+     * 基本的な時間割数
+     */
+    defaultTimelineIndex : number
+}
+```
+
+| プロパティ名 | 型 | 説明 |
+| --- | --- | --- |
+| grade | 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| number | 学年 |
+| class | number | string | クラス |
+| timelineData | [MonthData](./monthdata)\<[Subjects](./subjects)\> | 時間割 |
+| eventData | [MonthData](./monthdata)\<[EventData](./eventData.mdx)\> | イベント等データ |
+| homework | Homework[] | [] | 宿題データ |
+| defaultTimelineData | [MonthData](./monthdata)\<[Subjects](./subjects)\> | 基本的な時間割 |
+| defaultTimelineIndex | number | 基本的な時間割数 |

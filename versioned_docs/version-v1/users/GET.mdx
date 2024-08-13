@@ -1,0 +1,62 @@
+## GET /v1/users/\{id\}
+
+:::warning
+認証が必須です。
+:::
+
+user情報を取得します。
+
+### リクエスト
+
+```http
+GET /v1/users/\{id\}
+```
+
+### レスポンス ( Example )
+
+```js
+{
+    "developer" : boolean
+    "hid" : Snowflake
+    "discordAccount" ?: boolean
+    "username" : string
+    "isBot" ?: boolean
+    "description" ?: string
+}
+```
+
+|  値名  |  型  | 説明  | かならず出現するか  |
+| ---- | ---- | ---- | ---- |
+|  developer  |  Boolean  | 開発者が有効かどうかです。全てのアカウントでtrueになります。  |true |
+|  hid  |  Snowflake (BigInt or String)  | ユーザーのUniqueIDです。  |true |
+|  discordAccount  |  Boolean  | Discordアカウントでの登録が有効かどうかです。  |true |
+|  username  |  String  | ユーザーの名前です。  |true |
+|  isBot  |  Boolean  | ユーザーがBotかどうかを判別します。Botの場合出現します。 | false  |
+|  description  |  String  | Botの説明です。  | false  |
+
+### リクエスト
+
+```http
+GET /v1/users/@me
+```
+
+### レスポンス ( Example )
+
+```js
+{
+    "developer" : boolean
+    "hid" : Snowflake
+    "discordAccount" ?: boolean
+    "username" : string
+    "email" : string
+}
+```
+
+|  値名  |  型  | 説明  | かならず出現するか  |
+| ---- | ---- | ---- | ---- |
+|  developer  |  Boolean  | 開発者が有効かどうかです。 | true |
+|  hid  |  Snowflake (BigInt or String)  | ユーザーのUniqueIDです。   | true |
+|  discordAccount  |  Boolean  | Discordアカウントでの登録が有効かどうかです。   | true |
+|  username  |  String  | ユーザーの名前です。  | true |
+|  email  |  String  | ユーザーのメールアドレスです。 <br />※`@me`の場合のみ出現します。  | true |
+

@@ -1,0 +1,25 @@
+
+# types : School 
+
+```ts
+{
+    /**
+     * 学校管理Id
+     */
+    schoolId: string,
+    /**
+     * 学校情報
+     */
+    details: DetailSchool,
+    /**
+     *  ユーザー管理データ
+     */
+    userDatas: UserDatas[]
+}
+```
+
+| フィールド名 | 型 | 説明 |
+| --- | --- | --- |
+| schoolId | string | 学校管理Id |
+| details | [DetailSchool](./detailschool) | 学校情報 |
+| userDatas | [UserDatas](./userDatas)[] | ユーザー管理データ |
