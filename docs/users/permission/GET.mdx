@@ -1,0 +1,35 @@
+# GET
+
+UserIdから紐づく学校を取得します。
+
+### Request
+
+```http
+GET /users/:id/permission
+```
+
+:::warning
+いろいろな理由で、`@me`以外を指定できません。
+:::
+
+### Request ( Example )
+
+```http
+GET /users/@me/permission
+```
+
+### Response ( Example )
+
+```js
+{
+    data : ["1212121212121212212", "1212121212121212212"]
+}
+```
+
+|  値名  |  型  | 説明  | かならず出現するか  |
+| ---- | ---- | ---- | ---- |
+|  data  |  String[]  | ユーザーに紐づく学校です。  | true |
+
+
+
+

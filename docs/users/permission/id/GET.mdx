@@ -1,0 +1,36 @@
+# GET
+
+紐づいている学校かを判定します。
+
+`false`の場合、権限未所持の学校となります。
+
+### Request
+
+```http
+GET /users/:id/permission/:schoolId
+```
+
+:::warning
+いろいろな理由で、`@me`以外を指定できません。
+:::
+
+### Request ( Example )
+
+```http
+GET /users/@me/permission/1212121212121212212
+```
+
+### Response ( Example )
+
+```js
+{
+    data : true
+}
+```
+
+|  値名  |  型  | 説明  | かならず出現するか  |
+| ---- | ---- | ---- | ---- |
+|  data  |  boolean  | ユーザーに紐づいている学校か  | true |
+
+
+
